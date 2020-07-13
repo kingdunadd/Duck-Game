@@ -46,14 +46,14 @@ func _process(delta):
 func _physics_process(delta):
 	var head_basis = head.get_global_transform().basis
 	var direction = Vector3()
-	if Input.is_action_pressed("move_forward"):
+	if Input.is_action_pressed("forward"):
 		direction -= head_basis.z
-	elif Input.is_action_pressed("move_backward"):
+	elif Input.is_action_pressed("backward"):
 		direction += head_basis.z
 
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("left"):
 		direction -= head_basis.x
-	elif Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("right"):
 		direction += head_basis.x
 		
 	direction = direction.normalized()
@@ -67,10 +67,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP)
 
 
-	if Input.is_action_just_pressed("fire"):
-		if aimcast.is_colliding():
-			var b = duck.instance()
-			muzzle.add_child(b)
-			b.look_at(aimcast.get_collision_point(), Vector3.UP)
-			b.shoot = true
+#	if Input.is_action_just_pressed("fire"):
+#		if aimcast.is_colliding():
+#			var b = duck.instance()
+#			muzzle.add_child(b)
+#			b.look_at(aimcast.get_collision_point(), Vector3.UP)
+#			b.shoot = true
 
