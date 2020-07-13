@@ -1,36 +1,24 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://cybergun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://hallway_modular.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Door.gd" type="Script" id=3]
 
-[sub_resource type="CapsuleShape" id=1]
-radius = 0.75
-height = 1.25
-
-[sub_resource type="CapsuleMesh" id=2]
-radius = 0.75
-mid_height = 1.25
-
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.952941, 0.0666667, 0.0666667, 1 )
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.908267, 1, 1 )
 
 [node name="World" type="Spatial"]
 
-[node name="Player" type="KinematicBody" parent="."]
+[node name="Player" parent="." groups=[
+"Player",
+] instance=ExtResource( 1 )]
+transform = Transform( 0.777807, 0, 0, 0, 0.777807, 0, 0, 0, 0.777807, 0, 1.28875, 0 )
 
-[node name="Head" type="Spatial" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.600364, 0 )
+[node name="hallway_modular" type="RigidBody" parent="." instance=ExtResource( 2 )]
+mode = 1
+mass = 0.00102041
+script = ExtResource( 3 )
 
-[node name="Camera" type="Camera" parent="Player/Head"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0851318, 0 )
-
-[node name="cybergun" parent="Player/Head" instance=ExtResource( 1 )]
-transform = Transform( -3.76212e-08, 0, 0.230917, 0, 0.230917, 0, -0.230917, 0, -3.76212e-08, 0, -0.0951456, 0.287785 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+[node name="CollisionShape" type="CollisionShape" parent="hallway_modular"]
+transform = Transform( 68.0785, 0, 0, 0, 1, 0, 0, 0, 37.8469, 16.1318, 0, -5.17114 )
 shape = SubResource( 1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = SubResource( 3 )
